@@ -6,7 +6,7 @@
 
 File|Description/Path|state(F==Finished,N==uncompleted)
 ---|---|---
-C_NOTE|/C-NOTE|N
+C_NOTE.md|/C-NOTE|N
 0运算符优先次序.md|/C-NOTE|F
 1数据结构.md|/C-NOTE|F
 2顺序程序设计.md|/C-NOTE|F
