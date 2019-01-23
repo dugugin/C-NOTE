@@ -1,4 +1,4 @@
-# C-NOTE CONTENT
+# CONTENT
 
 - C_NOTE.md是参加2019年万门大学网课的笔记
 - 数字编号的md文件是《c语言程序设计》的学习笔记
