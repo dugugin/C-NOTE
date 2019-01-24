@@ -13,3 +13,4 @@ C_NOTE.md|/C-NOTE|N
 3分支结构程序.md|/C-NOTE|F
 4循环控制结构.md|/C-NOTE|F
 5数组.md|/C-NOTE|F
+6函数.md|/C-NOTE|F
