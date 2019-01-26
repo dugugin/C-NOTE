@@ -1,10 +1,11 @@
+
 # CONTENT
 
 - C_NOTE.md是参加2019年万门大学网课的笔记
-- 数字编号的md文件是《c语言程序设计》的学习笔记
+- 数字编号的md文件是b站小甲鱼教学视频《c程序设计》的学习笔记
 
 
-File|Description/Path|state(F==Finished,N==uncompleted)
+File|Description/<br>Path|State<br>(F==Finished,<br>N==uncompleted)
 ---|---|---
 C_NOTE.md|/C-NOTE|N
 0运算符优先次序.md|/C-NOTE|F
@@ -14,3 +15,4 @@ C_NOTE.md|/C-NOTE|N
 4循环控制结构.md|/C-NOTE|F
 5数组.md|/C-NOTE|F
 6函数.md|/C-NOTE|F
+7指针.md|/C-NOTE|F
