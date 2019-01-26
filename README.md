@@ -2,7 +2,7 @@
 # CONTENT
 
 - C_NOTE.md是参加2019年万门大学网课的笔记
-- 数字编号的md文件是b站小甲鱼教学视频《c程序设计》的学习笔记
+- 数字编号的md文件是[b站小甲鱼教学视频](https://www.bilibili.com/video/av2831981)《c程序设计》的学习笔记
 
 
 File|Description/<br>Path|State<br>(F==Finished,<br>N==uncompleted)
