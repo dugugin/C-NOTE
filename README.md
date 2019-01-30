@@ -16,3 +16,5 @@ C_NOTE.md|/C-NOTE|N
 5数组.md|/C-NOTE|F
 6函数.md|/C-NOTE|F
 7指针.md|/C-NOTE|F
+8预处理.md|/C-NOTE|F
+9结构体与共用体.md|/C-NOTE|F
