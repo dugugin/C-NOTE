@@ -24,73 +24,68 @@ void main()
 	struct student *head = NULL, *p0, *p;
 	int c, id;
 	printf("  Welcome to Score Management System!\n");
-loopt:printf("=========按1插入成绩；按2删除成绩；按3退出系统=========\n");
-
-	//控制输入与删除
-	scanf("%d", &c);
-	while (c != 1 && c != 2 && c != 3)
+	while (1)
 	{
-		printf("\t\tError!Please input again.\n");
-		scanf("%d", &c);
-	}
-
-	switch (c)
-	{
-	case 1:		//录入成绩
-
-
-		do {
-
-			printf("输入要插入的学号与分数\n");
-
-			p0 = (struct student *)malloc(LEN);
-			printf("\tid:");
-			scanf("%d", &p0->num);
-			printf("\tscore:");
-			scanf("%f", &p0->score);
-
-			while (p0->score > 100 || p0->score < 0 || (p = insert(head, p0)) == NULL)
+		printf("\n=========按任意键继续；按ESC退出系统=========\n");
+		if (getch() == 27) break;
+		else
+		{
+			//控制输入与删除
+			printf("\n=========按1插入成绩；按2删除成绩=========\n");
+			scanf("%d", &c);
+			while (c != 1 && c != 2)
 			{
-				printf("\n\t\tError!Please input again.\n\n重新输入要插入的学号与分数：\n");
-				printf("\tid:");
-				scanf("%d", &p0->num);
-				printf("\tscore:");
-				scanf("%f", &p0->score);
+				printf("\t\tError!Please input again.\n");
+				scanf("%d", &c);
 			}
-			//head = insert(head, p0);	//if里面的head已经进行了一次insert
-			head = p;
-			n++;
-			printf("\n\t\t\t按enter插入下一个成绩；按ESC结束成绩录入并打印成绩表。\n\n");
-		} while (getch() != 27);	// 27==ESC	13==enter
-		print(head);
-		break;
 
-	case 2:	//删除成绩
-		do {
-			printf("\t输入要删除的学号：");
-			scanf("%d", &id);
+			switch (c)
+			{
+			case 1:		//录入成绩
 
-			p = del(head, id);	//p是插入新学号后的head
-			head = p;
-			if (n > 0) n--;
-			printf("\n\t\t\t按enter继续删除下一个成绩；按ESC结束删除并打印成绩表。\n\n");
-		} while (getch() != 27);
-		print(head);
-		break;
+				do {
 
-	case 3:	//退出系统
-		break;
+					printf("输入要插入的学号与分数\n");
+
+					p0 = (struct student *)malloc(LEN);
+					printf("\tid:");
+					scanf("%d", &p0->num);
+					printf("\tscore:");
+					scanf("%f", &p0->score);
+
+					while (p0->score > 100 || p0->score < 0 || (p = insert(head, p0)) == NULL)
+					{
+						printf("\n\t\tError!Please input again.\n\n重新输入要插入的学号与分数：\n");
+						printf("\tid:");
+						scanf("%d", &p0->num);
+						printf("\tscore:");
+						scanf("%f", &p0->score);
+					}
+					//head = insert(head, p0);	//if里面的head已经进行了一次insert
+					head = p;
+					n++;
+					printf("\n\t\t\t按enter插入下一个成绩；按ESC结束成绩录入并打印成绩表。\n\n");
+				} while (getch() != 27);	// 27==ESC	13==enter
+				print(head);
+				break;
+
+			case 2:	//删除成绩
+				do {
+					printf("\t输入要删除的学号：");
+					scanf("%d", &id);
+
+					p = del(head, id);	//p是插入新学号后的head
+					head = p;
+					if (n > 0) n--;
+					printf("\n\t\t\t按enter继续删除下一个成绩；按ESC结束删除并打印成绩表。\n\n");
+				} while (getch() != 27);
+				print(head);
+				break;
+			}
+		}
 
 	}
-
-	printf("\n\t\t\t按ESC确认退出系统，按Enter返回菜单继续操作。\n");
-	switch (c = getch())	// 27==ESC	13==enter
-	{
-	case 27:goto loope;
-	default:goto loopt;
-	}
-
-loope:printf("\n\n...Good Bye!\n");
+	printf("\n\n...Good Bye!\n");
 	system("pause");
 }
 
@@ -109,7 +104,13 @@ struct student *insert(struct student *head, struct student *p0)
 			p2 = p1;
 			p1 = p1->next;
 		}
-		if (p0->num < p1->num)
+		if (p0->num == p1->num)
+		{
+			printf("\tNo insert:无法插入，已经有该学生的成绩。应先删除该学号再重新录入。\n");
+			if (n > 0) n--;
+			return initial;
+		}
+		else if (p0->num < p1->num)
 		{
 			if (p1 == head)
 			{
@@ -120,26 +121,21 @@ struct student *insert(struct student *head, struct student *p0)
 				p2->next = p0;
 			}
 			p0->next = p1;
-		}
-		else if (p0->num == p1->num)
-		{
-			printf("\tNo insert:无法插入，已经有该学生的成绩。应先删除该学号再重新录入。\n");
-			return initial;
-			goto loopend;
+			return head;
 		}
 		else
 		{
 			p1->next = p0;
 			p0->next = NULL;
+			return head;
 		}
 	}
 	else
 	{
 		head = p0;
 		p0->next = NULL;
+		return head;
 	}
-	return head;
-loopend:;
 }
 
 struct student *del(struct student *head, int id)
