@@ -73,7 +73,7 @@ loopt:printf("=========按1插入成绩；按2删除成绩；按3退出系统===
 			p = del(head, id);	//p是插入新学号后的head
 			head = p;
 			if (n > 0) n--;
-			printf("\n\t\t\t按enter继续删除下一个成绩；按ESC结束删除打印成绩表。\n\n");
+			printf("\n\t\t\t按enter继续删除下一个成绩；按ESC结束删除并打印成绩表。\n\n");
 		} while (getch() != 27);
 		print(head);
 		break;
