@@ -76,7 +76,7 @@ void main()
 
 					p = del(head, id);	//p是插入新学号后的head
 					head = p;
-					if (n > 0) n--;
+
 					printf("\n\t\t\t按enter继续删除下一个成绩；按ESC结束删除并打印成绩表。\n\n");
 				} while (getch() != 27);
 				print(head);
@@ -136,6 +136,8 @@ struct student *insert(struct student *head, struct student *p0)
 		p0->next = NULL;
 		return head;
 	}
+	free(p1); free(p2);
+	p1 = p2 = NULL;
 }
 
 struct student *del(struct student *head, int id)
@@ -152,6 +154,7 @@ struct student *del(struct student *head, int id)
 		if (id == p1->num)
 		{
 			printf("\n删除了学号%d\n", id);
+			if (n > 0) n--;
 			if (p1 == head) head = p1->next;
 			else p2->next = p1->next;
 		}
