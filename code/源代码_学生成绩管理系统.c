@@ -10,7 +10,7 @@ struct student *insert(struct student *head, struct student *p0);
 struct student *del(struct student *head, int id);
 void print(struct student *head);
 
-int n;	//È«¾Ö±äÁ¿£¬ÓÃÀ´¼ÇÂ¼´æ·ÅÁË¶àÉÙÊý¾Ý¡£
+int n;	//å…¨å±€å˜é‡ï¼Œç”¨æ¥è®°å½•å­˜æ”¾äº†å¤šå°‘æ•°æ®ã€‚
 
 struct student
 {
@@ -21,86 +21,90 @@ struct student
 
 void main()
 {
-	struct student *head=NULL,*p0,*p;
-	int c,id;
-	printf("Welcome to Score Management System!\n");
-	loopt:printf("=========°´1²åÈë³É¼¨£»°´2É¾³ý³É¼¨£»°´3ÍË³öÏµÍ³=========\n");
-	//¿ØÖÆÊäÈëÓëÉ¾³ý
-	while (scanf("%d", &c)!=1 && scanf("%d", &c) != 2 && scanf("%d", &c) != 3)
+	struct student *head = NULL, *p0, *p;
+	int c, id;
+	printf("  Welcome to Score Management System!\n");
+loopt:printf("=========æŒ‰1æ’å…¥æˆç»©ï¼›æŒ‰2åˆ é™¤æˆç»©ï¼›æŒ‰3é€€å‡ºç³»ç»Ÿ=========\n");
+
+	//æŽ§åˆ¶è¾“å…¥ä¸Žåˆ é™¤
+	scanf("%d", &c);
+	while (c != 1 && c != 2 && c != 3)
 	{
 		printf("\t\tError!Please input again.\n");
+		scanf("%d", &c);
 	}
 
 	switch (c)
 	{
-	case 1:		//Â¼Èë³É¼¨
+	case 1:		//å½•å…¥æˆç»©
 
-		
+
 		do {
 
-			printf("ÊäÈëÒª²åÈëµÄÑ§ºÅÓë·ÖÊý\n");
-		loop1:
+			printf("è¾“å…¥è¦æ’å…¥çš„å­¦å·ä¸Žåˆ†æ•°\n");
+
 			p0 = (struct student *)malloc(LEN);
 			printf("\tid:");
 			scanf("%d", &p0->num);
 			printf("\tscore:");
 			scanf("%f", &p0->score);
 
-			if (p0->score > 100 || p0->score < 0 ||( p=insert(head, p0) )== NULL)
+			while (p0->score > 100 || p0->score < 0 || (p = insert(head, p0)) == NULL)
 			{
-				printf("\n\t\tError!Please input again.\nÊäÈëÒª²åÈëµÄÑ§ºÅÓë·ÖÊý£º\n");
-				goto loop1;
+				printf("\n\t\tError!Please input again.\n\né‡æ–°è¾“å…¥è¦æ’å…¥çš„å­¦å·ä¸Žåˆ†æ•°ï¼š\n");
+				printf("\tid:");
+				scanf("%d", &p0->num);
+				printf("\tscore:");
+				scanf("%f", &p0->score);
 			}
-			//head = insert(head, p0);	//ifÀïÃæµÄheadÒÑ¾­½øÐÐÁËÒ»´Îinsert
+			//head = insert(head, p0);	//ifé‡Œé¢çš„headå·²ç»è¿›è¡Œäº†ä¸€æ¬¡insert
 			head = p;
 			n++;
-			printf("\n\t\t\t°´enter²åÈëÏÂÒ»¸ö³É¼¨£»°´ESC½áÊø³É¼¨Â¼Èë²¢´òÓ¡³É¼¨±í¡£\n\n");
+			printf("\n\t\t\tæŒ‰enteræ’å…¥ä¸‹ä¸€ä¸ªæˆç»©ï¼›æŒ‰ESCç»“æŸæˆç»©å½•å…¥å¹¶æ‰“å°æˆç»©è¡¨ã€‚\n\n");
 		} while (getch() != 27);	// 27==ESC	13==enter
-		printf("\n\n");
-		printf("\nthere are %d records!\n\n", n);
 		print(head);
 		break;
 
-	case 2:	//É¾³ý³É¼¨
+	case 2:	//åˆ é™¤æˆç»©
 		do {
-			printf("\tÊäÈëÒªÉ¾³ýµÄÑ§ºÅ£º");
+			printf("\tè¾“å…¥è¦åˆ é™¤çš„å­¦å·ï¼š");
 			scanf("%d", &id);
-			
-			head = del(head, id);	//pÊÇ²åÈëÐÂÑ§ºÅºóµÄhead
-			n--;
-			printf("\n\t\t\t°´enter¼ÌÐøÉ¾³ýÏÂÒ»¸ö³É¼¨£»°´ESC½áÊøÉ¾³ý´òÓ¡³É¼¨±í¡£\n\n");
-		} while (getch() != 27);	
-		printf("\n\n");
-		printf("\nthere are %d records!\n\n", n);
+
+			p = del(head, id);	//pæ˜¯æ’å…¥æ–°å­¦å·åŽçš„head
+			head = p;
+			if (n > 0) n--;
+			printf("\n\t\t\tæŒ‰enterç»§ç»­åˆ é™¤ä¸‹ä¸€ä¸ªæˆç»©ï¼›æŒ‰ESCç»“æŸåˆ é™¤æ‰“å°æˆç»©è¡¨ã€‚\n\n");
+		} while (getch() != 27);
 		print(head);
 		break;
 
-	case 3:	//ÍË³öÏµÍ³
-		goto loope;
+	case 3:	//é€€å‡ºç³»ç»Ÿ
 		break;
 
 	}
-	printf("\n\t\t\t°´ESCÍË³öÏµÍ³£¬°´Enter·µ»Ø²Ëµ¥¼ÌÐø²Ù×÷¡£\n");
+
+	printf("\n\t\t\tæŒ‰ESCç¡®è®¤é€€å‡ºç³»ç»Ÿï¼ŒæŒ‰Enterè¿”å›žèœå•ç»§ç»­æ“ä½œã€‚\n");
 	switch (c = getch())	// 27==ESC	13==enter
 	{
 	case 27:goto loope;
-	case 13:goto loopt;
+	default:goto loopt;
 	}
-	loope:printf("\n\n...Good Bye!\n");
+
+loope:printf("\n\n...Good Bye!\n");
 	system("pause");
 }
 
 struct student *insert(struct student *head, struct student *p0)
 {
-	struct student *p1, *p2,*initial;
+	struct student *p1, *p2, *initial;
 	initial = head;
-	p1 = p2 = (struct student *)malloc(LEN);	//¶¯Ì¬µÄ³õÊ¼»¯£¬ÀàËÆÓÚ(*p)[x]£¬[x]ÊÇ´ýÌî³äµÄÄÚ´æ´óÐ¡¡£
+	p1 = p2 = (struct student *)malloc(LEN);	//åŠ¨æ€çš„åˆå§‹åŒ–ï¼Œç±»ä¼¼äºŽ(*p)[x]ï¼Œ[x]æ˜¯å¾…å¡«å……çš„å†…å­˜å¤§å°ã€‚
 	p1 = head;
 
 	if (head)
 	{
 		while (p1->next != NULL && p0->num > p1->num)
-			//ÏÈÕÒµ½²åÈëµÄÎ»ÖÃ¡£
+			//å…ˆæ‰¾åˆ°æ’å…¥çš„ä½ç½®ã€‚
 		{
 			p2 = p1;
 			p1 = p1->next;
@@ -119,7 +123,7 @@ struct student *insert(struct student *head, struct student *p0)
 		}
 		else if (p0->num == p1->num)
 		{
-			printf("\tNo insert:ÎÞ·¨²åÈë£¬ÒÑ¾­ÓÐ¸ÃÑ§ÉúµÄ³É¼¨¡£Ó¦ÏÈÉ¾³ý¸ÃÑ§ºÅÔÙÖØÐÂÂ¼Èë¡£\n");
+			printf("\tNo insert:æ— æ³•æ’å…¥ï¼Œå·²ç»æœ‰è¯¥å­¦ç”Ÿçš„æˆç»©ã€‚åº”å…ˆåˆ é™¤è¯¥å­¦å·å†é‡æ–°å½•å…¥ã€‚\n");
 			return initial;
 			goto loopend;
 		}
@@ -151,23 +155,26 @@ struct student *del(struct student *head, int id)
 		}
 		if (id == p1->num)
 		{
-			printf("\nÉ¾³ýÁËÑ§ºÅ%d\n", id);
+			printf("\nåˆ é™¤äº†å­¦å·%d\n", id);
 			if (p1 == head) head = p1->next;
 			else p2->next = p1->next;
 		}
-		else printf("\nÕÒ²»µ½¸ÃÑ§ºÅ\n");
+		else printf("\næ‰¾ä¸åˆ°è¯¥å­¦å·\n");
 	}
-	else printf("\nÕâÊÇ¿Õ±í");
+	else printf("\nè¿™æ˜¯ç©ºè¡¨");
 	return head;
 }
 
 void print(struct student *head)
-{	
-	printf("\n\tid\t\t\tscore\n");
+{
+	printf("\n\n");
+	printf("\nthere are %d records!\n\n", n);
+	if (NULL != head) printf("\n\tid\t\t\tscore\n");
 	while (NULL != head)
 	{
 		printf("\t%d\t\t\t%f\n", head->num, head->score);
 		head = head->next;
 	}
 }
+
 #endif
